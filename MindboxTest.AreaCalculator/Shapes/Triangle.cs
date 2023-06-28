@@ -32,12 +32,10 @@ public class Triangle : Shape
 
     public bool IsRightTriangle()
     {
-        if (_sideA > _sideB && _sideA > _sideC)
-            return Math.Abs(_sideA * _sideA - (_sideB * _sideB + _sideC * _sideC)) < 1e-6;
-
-        if (_sideB > _sideA && _sideB > _sideC)
-            return Math.Abs(_sideB * _sideB - (_sideA * _sideA + _sideC * _sideC)) < 1e-6;
-
-        return Math.Abs(_sideC * _sideC - (_sideA * _sideA + _sideB * _sideB)) < 1e-6;
+        double hypotenuse = Math.Max(_sideA, Math.Max(_sideB, _sideC));
+        double shortest = Math.Min(_sideA, Math.Min(_sideB, _sideC));
+        double middle = _sideA + _sideB + _sideC - hypotenuse - shortest;
+        
+        return hypotenuse * hypotenuse - shortest * shortest - middle * middle < 1e-6;
     }
 }
